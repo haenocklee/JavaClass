@@ -5,14 +5,14 @@ public class Ex04_LogicalOperator {
 	public static void main(String[] args) {
 		System.out.println(true&&true);
 		System.out.println(true&&false);
-		System.out.println(true||true);
+		//System.out.println(true||true);실행하면 2값이 전부 트루이기 때문에 올로쓸 이유가없음
 		
 		boolean bool1 = true;
 		boolean bool2 = false;
 		boolean bool3 = true;
 		
 		System.out.println(bool1&&bool2);
-		//불2불3의 or연산 결과를 result라는 변수에담고 result출력
+		//불2불3의 (or)연산 결과를 (result)라는 변수에담고 (result)출력
 		boolean result = bool2 || bool3;
 		System.out.println(result);
 		
