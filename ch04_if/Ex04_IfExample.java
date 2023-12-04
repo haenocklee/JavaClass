@@ -29,10 +29,9 @@ public class Ex04_IfExample {
 				sum = "D";
 			}else {
 				sum = "F";
-			}
-			System.out.print(sum);
+			}System.out.println("학점은"+ sum + "입니다");
 		}else {
-			System.out.print("입력범위 초과");
+			System.out.println("입력범위 초과");
 		}
 	}
 
