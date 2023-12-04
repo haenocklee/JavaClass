@@ -35,8 +35,6 @@ public class Ex06_IfExample {
 		}else {
 			System.out.println("조건에 없음");
 		}
-			
-
 	}
 
 }
