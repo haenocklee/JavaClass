@@ -20,7 +20,7 @@ public class Ex08_NestedFor {
                 System.out.print("\t"); // 공백을 만들어 주는 기능
             }
             System.out.println();
-//          System.out.println("\n"); 줄띄우기로 사용할수 있는 프린트 옵션
+//          System.out.print("\n"); 줄띄우기로 사용할수 있는 프린트 옵션
         }
         System.out.println("구구단 실행 완료");
     }
