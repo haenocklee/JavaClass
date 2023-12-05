@@ -6,7 +6,7 @@ public class Ex01_forBasic {
         for (int i = 0; i < 4; i++) {
             System.out.println("i = " + i);
         }
-        // 0 ~ 4 출력
+        //0~4 출력
         for (int i = 0; i <= 4; i++) {
             System.out.println("i = " + i);
         }

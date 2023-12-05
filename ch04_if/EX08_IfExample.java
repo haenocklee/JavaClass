@@ -13,6 +13,7 @@ public class EX08_IfExample {
 		int num2 = scanner.nextInt();
 		System.out.print("세번째:");
 		int num3 = scanner.nextInt();
+
 		
 		if(num1 > num2 && num1 > num3) {
 			System.out.print("가장 큰숫자는 " + num1 + "입니다");
