@@ -6,7 +6,7 @@ public class Ex03_ArrayEx {
     public static void main(String[] args) {
         /**
          * 크기가 3인 정수형 배열을 선언
-         * 실행 했을 때 스캐너로 정수값을 입력박아 배열에 저장
+         * 실행 했을 때 스캐너로 정수값을 입력받아 배열에 저장
          * 배열에 저장된 값의 총합, 평균 계산
          * */
 
