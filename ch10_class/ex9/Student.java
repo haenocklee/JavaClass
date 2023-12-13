@@ -51,7 +51,7 @@ public class Student {
 
     //기본메서드 //생성자?
     public Student(){}
-    //필드,getter/setter, 기본생성자, 매개변수 생성자, to string ... 필수 적으로 들어간다.
+        //필드, getter/setter, 기본생성자, 매개변수 생성자, to string ... 필수 적으로 들어간다.
 
     //모든 필드를 매개변수로 하는 생성자
     public Student(String studentName,String studentNumber,String studentMajor,String studentMobile){
