@@ -72,7 +72,7 @@ public class Board {
 //    내용(boardContents)
 //    조회수(boardHits)
     public Board(){}
-    public Board(long id,String boardTitle,String boardWriter,String boardContents,int boardHits){}
+    public Board(long id,String boardTitle,String boardWriter,String boardContents){}
 
 //    toString method
     @Override
@@ -96,7 +96,9 @@ public class Board {
 //    단 출력하기 전에 조회수 값을 1 증가 시켜야 한다.
     public void findById(long id){//id = 글번호
         if(id == getId()){
-            System.out.println(getBoardContents());
+            System.out.print("제목: " +  getBoardTitle());
+            System.out.print("저자: " + getBoardWriter());
+            System.out.println("본문 " + getBoardContents());
             this.boardHits = boardHits + 1;
             System.out.println("조회수:" + getBoardHits());
         }else{

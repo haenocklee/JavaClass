@@ -23,8 +23,8 @@ public class BoardMain {
             System.out.println("--------------------------------------------------------------");
             System.out.print("선택> ");
             selectNo = scanner.nextInt();
+
             if (selectNo == 1) {//boardContents = 글작성, id = 글번호
-                board = new Board();
                 System.out.print("제목: ");
                 String boardTitle = scanner.next();
                 System.out.print("작성자: ");
@@ -33,17 +33,17 @@ public class BoardMain {
                 String boardContents = scanner.next();
                 System.out.print("글번호(id):");
                 long id = scanner.nextLong();
-                board.setBoardTitle(boardTitle);
-                board.setBoardWriter(boardboardWriter);
-                board.setBoardContents(boardContents);
-                board.setId(id);
+                board = new Board(id,boardTitle,boardboardWriter,boardContents);
+
             } else if (selectNo == 2) {//id = 글번호
                 System.out.print("[글번호 입력]: ");
                 long id = scanner.nextLong();
                 board.findById(id);
+
             } else if (selectNo == 3) {
                 System.out.println("[종료]");
                 run = false;
+
             } else {
                 System.out.println(board);
             }
