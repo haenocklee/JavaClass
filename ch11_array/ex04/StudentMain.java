@@ -11,27 +11,28 @@ public class StudentMain {
         int selectNo = 0;
         StudentService studentService = new StudentService();
 
-        while(run){
-            System.out.println("-----");
-            System.out.println("1.method1 호출|2.method2 호출|3.method2 호출|4.종료");
-            System.out.println("-----");
+        while (run) {
+            System.out.println("-----------------------------------------------------------------------");
+            System.out.println("1.method1 호출 | 2.method2 호출 | 3.method2 호출 | 4.method4 호출 | 5.method5 호출 | 0.종료");
+            System.out.println("-----------------------------------------------------------------------");
             System.out.print("선택> ");
             selectNo = scanner.nextInt();
 
-            if(selectNo == 1){
+            if (selectNo == 1) {
                 studentService.method1();
-            }
-            else if(selectNo == 2){
+            } else if (selectNo == 2) {
                 studentService.method2();
-            }
-            else if(selectNo == 3){
+            } else if (selectNo == 3) {
                 studentService.method3();
-            }
-            else if(selectNo == 4){
+            } else if (selectNo == 4) {
+                studentService.method4();
+            } else if (selectNo == 5) {
+                studentService.method5();
+            } else if (selectNo == 0) {
                 run = false;
             }
 
         }
-
+        }
     }
-}
+
