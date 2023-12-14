@@ -25,7 +25,9 @@ public class Ex01_ListBasic {
         intList.remove(1);//1번방 삭재 2번방에 있던걸 1번방으로 이동
         System.out.println("intList.get(0)= " + intList.get(0));
         System.out.println("intList.get(1) = " + intList.get(1));
-        System.out.println("intList.get(2) = " + intList.get(2));
+//        System.out.println("intList.get(2) = " + intList.get(2));
+//        실행불가 1번방이 삭재되면서 2번방 내용이 1번방으로 들어가고
+//        결과적으로 크기값이 줄어들어 intList.get(2)가 사라졋다
 
         //String을 담는 StrList 선언
         List<String> strList = new ArrayList<>();
