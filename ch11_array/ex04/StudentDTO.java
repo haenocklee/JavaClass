@@ -52,7 +52,6 @@ public class StudentDTO {
 
     private static Long idValue = 1L;
     public StudentDTO( String studentName, String studentNumer, String studentMajar, String studentMobile) {
-        this.id = id;
         this.studentName = studentName;
         this.studentNumer = studentNumer;
         this.studentMajar = studentMajar;
