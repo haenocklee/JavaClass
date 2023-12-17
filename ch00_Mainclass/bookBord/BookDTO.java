@@ -58,7 +58,7 @@ public class BookDTO {
 
     Long idValue = 1L;
 
-    public BookDTO(Long id, String bookTitle, String bookAuthor, int bookPrice, String bookPublisher) {
+    public BookDTO(String bookTitle, String bookAuthor, int bookPrice, String bookPublisher) {
         this.id = idValue++;
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;

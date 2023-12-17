@@ -19,17 +19,17 @@ public class BookMain {
             } else if (selectNo == 1) {
                 bookService.regist();
             } else if (selectNo == 2) {
-
+                bookService.list();
             }else if (selectNo == 3) {
-
+                bookService.askId();
             }else if (selectNo == 4) {
-
+                bookService.askTitle();
             }else if (selectNo == 5) {
-
+                bookService.fixPrice();
             }else if (selectNo == 6) {
-
+                bookService.delete();
             }else if (selectNo == 7) {
-
+                bookService.serch();
             }
         }
     }
