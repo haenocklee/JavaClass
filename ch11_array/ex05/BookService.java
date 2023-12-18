@@ -95,9 +95,14 @@ public class BookService {
 
     public void search() {
         System.out.print("검색어: ");
+        //변수 bookTile에 스케너로 입력받음
         String bookTile = scanner.next();
+        //Repository의Search에 변수bookTile을 보내고 search로부터 값을 받아옴
+        //List<>BookDTO형태의 변수bookDTOList에 받아온 search값을 넣는다
         List<BookDTO> bookDTOList = bookRepository.search(bookTile);
+        //리스트 변수 bookDTOList의 크기 보다 0이 작을시 if를 실행
         if(bookDTOList.size() > 0){
+            //if가실행됬으면 BookDTO형태의 변수 bookDTO를 bookDTOList
             for (BookDTO bookDTO: bookDTOList) {
                 System.out.println("bookDTO = " + bookDTO);
             }
