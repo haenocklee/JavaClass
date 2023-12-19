@@ -17,7 +17,7 @@ public class BoardMain {
                 boardService.writing();
 
             } else if (select == 2) {//글목록
-                boardService.list();
+                boardService.findAll();
 
             } else if (select == 3) {//글조회 조회수
                 boardService.view();

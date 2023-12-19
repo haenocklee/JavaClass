@@ -1,5 +1,8 @@
 package ch11_array.ex7;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BoardDTO {
     //    ## 자바 게시판 프로젝트
 //### 주요 기능
@@ -29,6 +32,8 @@ public class BoardDTO {
     private Long id;
 
     private int views;
+
+    private String createdAt;
 
     public String getBoardTitle() {
         return boardTitle;
@@ -78,10 +83,27 @@ public class BoardDTO {
         this.views = views;
     }
 
-    private static Long idValue = 1l;
-    private static int viewsValue = 0;
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private static Long idValue = 1L;
 
     public BoardDTO (){}
+
+    public BoardDTO(String boardTitle, String boardWriter, String boardContents, String boardPass) {
+        this.boardTitle = boardTitle;
+        this.boardWriter = boardWriter;
+        this.boardContents = boardContents;
+        this.boardPass = boardPass;
+        this.id = idValue++;
+        this.views = 0;
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 
     @Override
     public String toString() {
@@ -92,15 +114,7 @@ public class BoardDTO {
                 ", boardPass='" + boardPass + '\'' +
                 ", id=" + id +
                 ", views=" + views +
+                ", createdAt='" + createdAt + '\'' +
                 '}';
-    }
-
-    public BoardDTO(String boardTitle, String boardWriter, String boardContents, String boardPass) {
-        this.boardTitle = boardTitle;
-        this.boardWriter = boardWriter;
-        this.boardContents = boardContents;
-        this.boardPass = boardPass;
-        this.id = idValue++;
-        this.views = views;
     }
 }

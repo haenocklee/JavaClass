@@ -20,6 +20,9 @@ public class BoardRepository {
     }
 
     //목록
+    public List<BoardDTO> findAll() {
+        return boardDTOList;
+    }
 
     //조회수 증가
     public void check(Long id) {
@@ -31,7 +34,7 @@ public class BoardRepository {
             }
         }
     }
-
+ //조회값
     public BoardDTO view(Long id) {
         BoardDTO result = null;
         for (int i = 0; i < boardDTOList.size(); i++) {
@@ -77,10 +80,6 @@ public class BoardRepository {
             }
         }
         return boardDTOS;
-    }
-
-    public List<BoardDTO> list() {
-        return boardDTOList;
     }
 }
 

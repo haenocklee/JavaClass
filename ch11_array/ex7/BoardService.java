@@ -29,15 +29,14 @@ public class BoardService {
 
 
     //글목록
-    public void list() {
-        List<BoardDTO> boardDTOList = boardRepository.list();
-        for (int i = 0; i < boardDTOList.size(); i++) {
-            System.out.println("boardDTOList = " + boardDTOList.get(i));
-        }
+    public void findAll() {
+        List<BoardDTO> boardDTOList = boardRepository.findAll();
+        listPrint(boardDTOList);
+//        for (int i = 0; i < boardDTOList.size(); i++) {
+//            System.out.println("boardDTOList = " + boardDTOList.get(i));
+//    }
 
     }
-
-
 
 
     //글조회
@@ -93,13 +92,27 @@ public class BoardService {
     public void search() {
         System.out.print("제목 검색: ");
         String sTitle = scanner.next();
-        List<BoardDTO> boardDTOS = boardRepository.search(sTitle);
-        if (boardDTOS.size() > 0) {
-            for (int i = 0; i < boardDTOS.size(); i++) {
-                System.out.println("제목 검색 결과 리스트" + boardDTOS.get(i));
-            }
-        }else{
+        List<BoardDTO> boardDTOList = boardRepository.search(sTitle);
+        if (boardDTOList.size() > 0) {
+            System.out.println("검색 결과");
+            listPrint(boardDTOList);
+//            for (int i = 0; i < boardDTOS.size(); i++) {
+//                System.out.println("제목 검색 결과 리스트: " + boardDTOS.get(i));
+//            }
+
+        } else {
             System.out.println("검색결과가 없습니다.");
         }
     }
+
+    //목록 출력 전용 메서드
+    //findAll,search 메서드로 부터 list데이터를 전달 받아서 출력하는 메서드
+    private void listPrint(List<BoardDTO> boardDTOList) {
+        System.out.println("id\t" + "title\t" + "writer\t" + "views\t" + "date\t");
+        for (BoardDTO boardDTO : boardDTOList) {
+            System.out.println(boardDTO.getId() + "\t" + boardDTO.getBoardTitle() + "\t" +
+                    boardDTO.getBoardWriter() + "\t" + boardDTO.getViews() + "\t" +
+                    boardDTO.getCreatedAt() + "\t");
+        }
+    }//Refectoring:반복되는 코드를 정돈시키는것
 }
