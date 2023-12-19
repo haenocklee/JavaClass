@@ -115,4 +115,11 @@ public class BoardService {
                     boardDTO.getCreatedAt() + "\t");
         }
     }//Refectoring:반복되는 코드를 정돈시키는것
+
+    public void testData() {
+        for (int i = 0; i < 11; i++) {
+            BoardDTO boardDTO = new BoardDTO("Title" + i,"Writer" + i,"contents" + i,"1234" + i);
+            boardRepository.writing(boardDTO);
+        }
+    }
 }
