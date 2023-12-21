@@ -48,7 +48,20 @@ public class BoardRepository {
     public void wUpate(String loginE) {
         for (int i = 0; i < boardDTOList.size(); i++) {
             if (loginE.equals(boardDTOList.get(i).getBoardWriter())) {
-                
+                System.out.println(boardDTOList.get(i));
+            }
+        }
+        System.out.print("수정할 글의 id를선택하세요: ");
+        Long id = scanner.nextLong();
+        for (int i = 0; i < boardDTOList.size(); i++) {
+            if (id.equals(boardDTOList.get(i).getId()) && loginE.equals(boardDTOList.get(i).getBoardWriter())) {
+                System.out.println("글수정");
+                System.out.print("제목: ");
+                String boardTitle = scanner.next();
+                System.out.print("내용:");
+                String boardContents = scanner.next();
+                boardDTOList.get(i).setBoardTitle(boardTitle);
+                boardDTOList.get(i).setBoardContents(boardContents);
             }
         }
     }
