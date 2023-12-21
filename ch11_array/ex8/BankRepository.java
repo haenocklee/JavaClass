@@ -12,11 +12,11 @@ public class BankRepository {
     String createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분ss초"));
 
     //게좌번호확인 전용 매서드
-    public boolean accountCheck(String accountNumber) {
-        boolean result = false;
+    public BankDTO accountCheck(String accountNumber) {
+        BankDTO result = null;
         for (int i = 0; i < clientList.size(); i++) {
             if (accountNumber.equals(clientList.get(i).getAccountNumber())) {
-                result = true;
+                result = clientList.get(i);
             }
         }
         return result;
@@ -54,7 +54,7 @@ public class BankRepository {
                 long sum = bal + dep;
                 clientList.get(i).setBalance(sum);
                 result = clientList.get(i).getBalance();
-                AccountDTO accountDTO = new AccountDTO(accountNumber, dep, 0,createdAt);
+                AccountDTO accountDTO = new AccountDTO(accountNumber, dep, 0, createdAt);
                 bankingList.add(accountDTO);
             }
         }
@@ -122,5 +122,23 @@ public class BankRepository {
             }
         }
         return result;
+    }
+
+    public void transfer(String accountNumberFrom, String accountNumberTo, long money) {
+        for (int i = 0; i < clientList.size(); i++) {
+            if (accountNumberFrom.equals(clientList.get(i).getAccountNumber())) {
+                long balance = clientList.get(i).getBalance();
+                balance = balance - money;
+                clientList.get(i).setBalance(balance);
+                AccountDTO accountDTO = new AccountDTO(accountNumberFrom,0,money,createdAt);
+                bankingList.add(accountDTO);
+            } else if (accountNumberTo.equals(bankingList.get(i).getAccountNumber())) {
+                long balance = clientList.get(i).getBalance();
+                balance = balance + money;
+                clientList.get(i).setBalance(balance);
+                AccountDTO accountDTO = new AccountDTO(accountNumberTo, money, 0,createdAt);
+                bankingList.add(accountDTO);
+            }
+        }
     }
 }

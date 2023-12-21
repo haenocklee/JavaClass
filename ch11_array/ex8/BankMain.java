@@ -27,7 +27,7 @@ public class BankMain {
             } else if (select == 5) {
                 bankService.findAllBanking();
             } else if (select == 6) {
-                bankService.accountTransfer();
+                bankService.transfer();
             }
         }
 

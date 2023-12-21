@@ -13,8 +13,8 @@ public class BankService {
         System.out.println("고객등록");
         System.out.print("계좌번호: ");
         String accountNumber = scanner.next();
-        boolean accountCheck = bankRepository.accountCheck(accountNumber);
-        if (accountCheck) {
+        BankDTO accountCheck = bankRepository.accountCheck(accountNumber);
+        if (accountCheck != null) {
             System.out.println("이미 존재하는 계좌 번호입니다.");
             save();
         }
@@ -27,8 +27,6 @@ public class BankService {
         if (result != null) {
             System.out.println("등록이 완료되었습니다");
             System.out.println("result = " + result);
-        } else {
-            System.out.println("계좌번호가 중복됩니다.");
         }
     }
 
@@ -41,7 +39,6 @@ public class BankService {
         if (result >= 0) {
             System.out.println("잔액조회 성공");
             System.out.println("잔액은: " + result);
-
         } else {
             System.out.println("없는 계좌 번호 입니다");
         }
@@ -52,8 +49,8 @@ public class BankService {
         System.out.println("입금");
         System.out.print("계좌번호: ");
         String accountNumber = scanner.next();
-        boolean accountCheck = bankRepository.accountCheck(accountNumber);
-        if (accountCheck) {
+        BankDTO accountCheck = bankRepository.accountCheck(accountNumber);
+        if (accountCheck != null) {
             System.out.println("계좌가 확인되었습니다.");
             System.out.print("입금 액: ");
             long dep = scanner.nextInt();
@@ -72,8 +69,8 @@ public class BankService {
         System.out.println("출금");
         System.out.print("계좌번호: ");
         String accountNumber = scanner.next();
-        boolean accountCheck = bankRepository.accountCheck(accountNumber);
-        if (accountCheck) {
+        BankDTO accountCheck = bankRepository.accountCheck(accountNumber);
+        if (accountCheck != null) {
             System.out.println("계좌가 확인되었습니다.");
             System.out.print("비밀번호: ");
             String clientPass = scanner.next();
@@ -134,6 +131,38 @@ public class BankService {
         }
     }
 
-    public void accountTransfer() {
+
+    public void transfer() {
+        System.out.print("보내실 분 계좌번호: ");
+        String accountNumberFrom = scanner.next();
+        System.out.print("받으실 분 계좌번호: ");
+        String accountNumberTo = scanner.next();
+        System.out.print("보낼 금액: ");
+        long money = scanner.nextLong();
+        BankDTO clientTo = bankRepository.accountCheck(accountNumberTo);
+        BankDTO clientFrom = bankRepository.accountCheck(accountNumberFrom);
+        if (clientTo != null && clientFrom != null) {
+            System.out.println("받으실 분이 " + clientTo.getClientName() + "님이 맞습니까?");
+            System.out.println("맞으면 1번, 틀리면 2번을 입력해주세요.");
+            System.out.print("입력> ");
+            int selectNo = scanner.nextInt();
+            if (selectNo == 1) {
+                System.out.print("비밀번호를 입력해주세요: ");
+                String clientPass = scanner.next();
+                if (clientPass.equals(clientFrom.getClientPass()) && money <= clientFrom.getBalance()) {
+                    bankRepository.transfer(accountNumberFrom, accountNumberTo, money);
+                    System.out.println("이체가 완료되었습니다. ");
+                } else if (!clientPass.equals(clientFrom.getClientPass())) {
+                    System.out.println("비밀번호가 틀립니다!");
+                } else if (money > clientFrom.getBalance()) {
+                    System.out.println("잔액이 부족합니다!");
+                }
+            } else if (selectNo == 2) {
+                System.out.println("메인메뉴로 돌아갑니다.");
+            }
+        } else {
+            System.out.println("해당 계좌가 없습니다.");
+        }
     }
 }
+
