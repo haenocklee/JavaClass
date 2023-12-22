@@ -1,45 +1,108 @@
 package ch11_array.ex9.service;
 
 import ch11_array.ex9.common.CommonVariables;
+import ch11_array.ex9.dto.MemberDTO;
 import ch11_array.ex9.repository.BoardRepository;
 import ch11_array.ex9.repository.MemberRepository;
 
 import java.util.Scanner;
 
 public class MemberService {
-    public void boardMenu() {
-        Scanner scanner = new Scanner(System.in);
-        BoardRepository boardRepository = new BoardRepository();
-        String loginE = CommonVariables.loginEmail;
-        boolean run = true;
-        while (run) {
-            System.out.println("====== 게시판 ======");
-            System.out.println("--------------------------------------------------------");
-            System.out.println("1.글작성 | 2.목록 | 3.글조회 | 4.글수정 | 5.글삭제 | 6.검색 | 99.sample | 0.메인메뉴");
-            System.out.println("--------------------------------------------------------");
-            System.out.print("선택> ");
-            int selectNo = scanner.nextInt();
-            if (selectNo == 0) {
-                System.out.println("메인메뉴로 나갑니다.");
-            } else if (selectNo == 1) {
-                boardRepository.write(loginE);
-            } else if (selectNo == 2) {
-                boardRepository.wFindAll(loginE);
-            } else if (selectNo == 3) {
-                boardRepository.wFindE(loginE);
-            } else if (selectNo == 4) {
-                boardRepository.wUpate(loginE);
-            } else if (selectNo == 5) {
-                boardRepository.wDelete(loginE);
-            } else if (selectNo == 6) {
-                boardRepository.wSearch(loginE);
-            } else if (selectNo == 99) {
-                boardRepository.sample();
+    Scanner scanner = new Scanner(System.in);
+    MemberRepository memberRepository = new MemberRepository();
 
-
+    //회원가입
+    public void saveMember() {
+        System.out.print("이메일: ");
+        String memberEmail = scanner.next();
+        MemberDTO clearEmail = memberRepository.checkEmail(memberEmail);
+        if (clearEmail != null) {
+            System.out.println("이미 등록된이메일 입니다.");
+            System.out.println("다시입력해주세요.");
+            saveMember();
+        }else{
+            System.out.print("비밀번호: ");
+            String memberPassword = scanner.next();
+            System.out.print("이름: ");
+            String memberName = scanner.next();
+            System.out.print("전화번호: ");
+            String memberMobile = scanner.next();
+            MemberDTO savedMember = memberRepository.saveMember(memberEmail, memberPassword, memberName, memberMobile);
+            if (savedMember != null) {
+                System.out.println("회원가입완료");
+                System.out.println("savedMember = " + savedMember);
             }
         }
     }
 
+    //로그인
+    public void login() {
+        System.out.print("이메일: ");
+        String memberEmail = scanner.next();
+        MemberDTO clearEmail = memberRepository.checkEmail(memberEmail);
+        if (clearEmail != null) {
+            System.out.print("비밀번호: ");
+            String memberPassword = scanner.next();
+            MemberDTO clearPass = memberRepository.checkPass(memberPassword);
+            if (clearPass != null) {
+                CommonVariables.loginEmail=memberEmail;
+                System.out.println("로그인 성공!");
+                System.out.println(memberEmail + " 님 환영합니다");
+            } else {
+                System.out.println("입력된 정보가 틀립니다.");
+            }
+        } else {
+            System.out.println("없는 이메일 입니다");
+        }
+    }
+
+    //회원목록
+    public void memberList() {
+        memberRepository.memberList();
+    }
+
+    //회원수정
+    public void memberUpate() {
+        if (CommonVariables.loginEmail != null) {
+            String loginE = CommonVariables.loginEmail;
+            System.out.print("수정할 전화번호를 입력해주세요: ");
+            String memberMobile = scanner.next();
+            MemberDTO result = memberRepository.memberUpate(loginE, memberMobile);
+            System.out.println("회원정보가 수정되었습니다.");
+            System.out.println("result = " + result);
+        } else {
+            System.out.println("로그인을 하셔야합니다");
+        }
+    }
+
+    //회원탈퇴
+    public void memberdelete() {
+        String loginEmail = CommonVariables.loginEmail;
+        System.out.println(loginEmail + "님 계정을 삭제하시겠습니까?");
+        if (CommonVariables.loginEmail != null) {
+            System.out.print("삭제를 원하시면 비밀번호를 입력하세요: ");
+            String pass = scanner.next();
+            MemberDTO memberDTO = memberRepository.checkPass(pass);
+            if(memberDTO != null){
+                boolean result = memberRepository.memberdelete(loginEmail);
+                if(result) {
+                    System.out.println("회원정보가 삭제되었습니다");
+                    CommonVariables.loginEmail = null;
+                    System.out.println("로그인정보: "+CommonVariables.loginEmail);
+                }else{
+                    System.out.println("입력된 정보가 틀립니다.");
+                }
+            }
+        } else {
+            System.out.println("로그인을 하셔야합니다");
+            login();
+        }
+    }
+
+    //로그아웃
+    public void logout() {
+        CommonVariables.loginEmail = null;
+        System.out.println("로그아웃 완료");
+    }
 }
 

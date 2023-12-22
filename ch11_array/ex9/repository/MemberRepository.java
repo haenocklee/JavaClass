@@ -37,7 +37,13 @@ public class MemberRepository {
     }
 
     public void memberList() {
-        System.out.println(memberDTOList);
+        if (memberDTOList.size() > 0) {
+            for (int i = 0; i < memberDTOList.size(); i++) {
+                System.out.println(memberDTOList.get(i));
+            }
+        }else{
+            System.out.println("가입된 회원이 없습니다.");
+        }
     }
 
     public MemberDTO memberUpate(String loginE, String memberMobile) {
